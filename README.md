@@ -76,7 +76,7 @@ como un ejecutable optimizado mediante **Nuitka** para garantizar un despliegue 
 ### 🏁 Guía Rápida:
 
 1.  **Ejecuta el instalador** en tu estación de trabajo.
-2.  **Consulta el [Manual de Configuración Inicial](https://github.com/Ccom5/GF-ElectroNexo/index.html)** para el proceso
+2.  **Consulta el [Manual de Configuración Inicial](https://github.com/Ccom5/ElectroNexo/index.html)** para el proceso
     de vinculación de hardware.
 3.  **Periodo de Evaluación:** El sistema permite hasta **15 ejecuciones de prueba** con funcionalidad completa antes de
     requerir activación.
