@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ElectroNexo — Documentación Técnica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1215;
+      --panel: #161a1f;
+      --panel-hover: #1b2027;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: #262e38;
+      --accent: #d4af37;
+      /* Premium Gold */
+      --accent-glow: rgba(212, 175, 55, 0.15);
+      --code-bg: #0a0c0f;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+    /* Typography */
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      color: var(--text-muted);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: #ffd700;
+      text-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    ul,
+    ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+      color: var(--text-muted);
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    li strong {
+      color: var(--text-main);
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      background: var(--code-bg);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+    }
+
+    /* Layout */
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      padding: 2rem 1.5rem;
+      background: rgba(22, 26, 31, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 2.5rem;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent) 0%, #8b6d1c 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--bg);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .brand-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-group {
+      margin-bottom: 2rem;
+    }
+
+    .nav-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #64748b;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-item a {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0.75rem;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.25rem;
+      font-weight: 400;
+    }
+
+    .nav-item a:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: #fff;
+      text-shadow: none;
+    }
+
+    /* Main Content */
+    .content-wrapper {
+      flex: 1;
+      padding: 3rem 4rem;
+      max-width: 900px;
+    }
+
+    .header-section {
+      margin-bottom: 4rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-top: 1rem;
+    }
+
+    /* Components */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      background: linear-gradient(to right, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.02));
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: 1.5rem 0;
+    }
+
+    .callout p {
+      margin: 0;
+      color: #e2e8f0;
+    }
+
+    .kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.2em 0.5em;
+      font-size: 0.85em;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: #fff;
+      background: #20262d;
+      border: 1px solid #333d49;
+      border-bottom-width: 2px;
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Images & Figures */
+    figure {
+      margin: 2rem 0;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+
+    figure:hover {
+      border-color: rgba(212, 175, 55, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+    }
+
+    .img-container {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: var(--transition);
+      opacity: 0.95;
+    }
+
+    figure:hover img {
+      opacity: 1;
+      transform: scale(1.01);
+    }
+
+    figcaption {
+      padding: 1rem 1.5rem;
+      background: var(--panel);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    figcaption::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .image-grid figure {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .image-grid .img-container {
+      flex: 1;
+    }
+
+    /* Numbered Steps */
+    .steps {
+      counter-reset: step-counter;
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0;
+    }
+
+    .steps li {
+      position: relative;
+      padding-left: 3rem;
+      margin-bottom: 1.5rem;
+      min-height: 2rem;
+    }
+
+    .steps li::before {
+      counter-increment: step-counter;
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: -2px;
+      width: 2rem;
+      height: 2rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .app-container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem;
+      }
+
+      .content-wrapper {
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .content-wrapper {
+        padding: 1.5rem;
+      }
+
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo" style="background: transparent; box-shadow: none;">
+          <img src="img/electronexo.png" alt="ElectroNexo"
+            style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;" />
+        </div>
+        <div class="brand-text">ElectroNexo</div>
+      </div>
+
+      <nav>
+        <div class="nav-group">
+          <div class="nav-label">Guía Principal</div>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="#inicio-rapido">Inicio Rápido</a></li>
+            <li class="nav-item"><a href="#arquitectura">Arquitectura Galvánica</a></li>
+            <li class="nav-item"><a href="#pipeline">Pipeline Geométrico</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-label">Herramientas</div>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="#visor">Control del Visor</a></li>
+            <li class="nav-item"><a href="#bisturi">Bisturí Quirúrgico</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-label">Avanzado</div>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="#busqueda">Búsqueda Dual</a></li>
+            <li class="nav-item"><a href="#datasheets">Datasheets</a></li>
+            <li class="nav-item"><a href="#memoria">Gestión de Proyectos</a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="content-wrapper">
+      <header class="header-section">
+        <h1>Manual de Usuario </h1>
+        <p>Documentación técnica para la extracción de topologías galvánicas y análisis geométrico de esquemáticos PDF.
+        </p>
+        <div class="badge">v2.0.0-GALVANIC</div>
+      </header>
+
+      <section id="inicio-rapido">
+        <h2>Inicio Rápido</h2>
+        <p>Comienza a operar con ElectroNexo en cuatro pasos fundamentales:</p>
+
+        <ol class="steps">
+          <li>Abre <strong>ElectroNexo Infinity</strong> (ejecutable autónomo) en tu entorno de trabajo.</li>
+          <li>En el panel izquierdo, bajo Flujo Galvánico, haz clic en <span class="kbd">PDF: cargar...</span> para
+            seleccionar tu archivo de esquema.</li>
+          <li>Presiona <span class="kbd">Analizar Topología</span>. El motor procesará la geometría del documento en
+            background sin congelar la interfaz.</li>
+          <li>Utiliza el Visor WebGL y el panel lateral para interactuar, trazar rutas y aislar componentes.</li>
+        </ol>
+
+        <figure>
+          <div class="img-container">
+            <!-- SUGERENCIA DE IMAGEN: Capturar la pantalla principal de la versión compilada (.exe) sin botones de IA -->
+            <img alt="Pantalla principal de ElectroNexo lista para operar" src="img/01_inicio_cargar_pdf.png" />
+          </div>
+          <figcaption>Interfaz principal: Panel de herramientas de Flujo Galvánico a la izquierda y el lienzo del Visor
+            WebGL a la derecha.</figcaption>
+        </figure>
+      </section>
+
+      <section id="arquitectura">
+        <h2>Arquitectura Galvánica (Escudo Azul)</h2>
+        <p>Para garantizar una extracción fiel de las redes eléctricas y evitar falsas continuidades, ElectroNexo
+          implementa un sistema de separación estricta.</p>
+
+        <div class="callout">
+          <p><strong>Muro de Fuego:</strong> Las técnicas de "Escudo Azul" (Blue Shield) y "Recorte Quirúrgico" aíslan
+            matemáticamente el cuerpo de los componentes, asegurando que las pistas eléctricas solo hagan contacto en
+            los terminales válidos.</p>
+        </div>
+
+        <ul>
+          <li><strong>Nodos (Magenta/Rojo)</strong>: Representan los anclajes críticos: uniones eléctricas (junctions) y
+            terminales de conexión.</li>
+          <li><strong>Componentes (Zonas Azules)</strong>: Mediante clausura morfológica, el motor genera islas convexas
+            que engloban el símbolo gráfico, bloqueando el paso de señales parásitas.</li>
+          <li><strong>Conductores (Naranja/Cian)</strong>: Las pistas del esquemático que se detectan como líneas
+            continuas y se intersecan con los recortes quirúrgicos para formar la topología.</li>
+        </ul>
+
+        <figure>
+          <div class="img-container">
+            <img alt="Topología completa mostrando el resultado del aislamiento"
+              src="img/03_analisis_completo_red_galvanica.png" />
+          </div>
+          <figcaption>Vista de topología extraída: Puedes observar claramente la protección de los cuerpos (azul) y el
+            paso de las redes (naranja).</figcaption>
+        </figure>
+      </section>
+
+      <section id="pipeline">
+        <h2>Pipeline Geométrico</h2>
+        <p>El procesamiento asíncrono garantiza una experiencia fluida incluso en documentos densos. Al solicitar un
+          análisis, ocurren las siguientes fases:</p>
+
+        <ol class="steps">
+          <li><strong>Extracción Vectorial:</strong> Lee las primitivas SVG filtrando capas de texto suprayacentes.</li>
+          <li><strong>Mapeo Zero-Delay:</strong> Sincronización instantánea de coordenadas normalizadas al sistema de
+            renderizado.</li>
+          <li><strong>Clausura Morfológica:</strong> Construcción de islas para componentes mediante proximidad y
+            <em>convex hull</em>.
+          </li>
+          <li><strong>Recorte Quirúrgico:</strong> Perforación exacta de las islas azules en los puntos donde se detecta
+            un nodo válido.</li>
+        </ol>
+
+        <figure>
+          <div class="img-container">
+            <img alt="Selección del archivo PDF a procesar" src="img/02_dialogo_seleccion_pdf.png" />
+          </div>
+          <figcaption>Selector de archivos: Optimizado para procesar manuales de servicio y esquemáticos en PDF.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="visor">
+        <h2>Control del Visor WebGL</h2>
+        <p>El renderizado se realiza localmente utilizando <code>TextureLoader</code> nativo de alta eficiencia,
+          eliminando la latencia al inyectar grandes volúmenes de datos JSON.</p>
+
+        <div class="image-grid">
+          <figure>
+            <div class="img-container">
+              <img alt="Trazado de red desde nodo seleccionado" src="img/05_trazado_red_desde_nodo.png" />
+            </div>
+            <figcaption>Propagación de una señal galvánica a partir de un nodo base.</figcaption>
+          </figure>
+          <figure>
+            <div class="img-container">
+              <img alt="Vista con todas las redes visibles simultáneamente"
+                src="img/04_vista_todas_redes_galvanicas.png" />
+            </div>
+            <figcaption>Modo "Ver Red Automática" para iluminar todo el árbol de conectividad.</figcaption>
+          </figure>
+        </div>
+
+        <h3 id="bisturi">Bisturí Quirúrgico (Edición Manual)</h3>
+        <p>En esquemas de baja calidad, el OCR o el extractor vectorial pueden omitir conexiones clave.</p>
+        <ul>
+          <li>Activa <span class="kbd">Modo Conexión Manual</span> en el panel.</li>
+          <li>Haz clic directamente en la intersección que deseas unir.</li>
+          <li>El sistema forzará un nodo, perforará la isla cercana y recalculará la continuidad instantáneamente.</li>
+        </ul>
+
+        <figure>
+          <div class="img-container">
+            <img alt="Modo conexión manual para añadir nodos" src="img/06_modo_conexion_manual_nodos.png" />
+          </div>
+          <figcaption>Creación de un nodo de empalme forzado mediante el Bisturí Quirúrgico.</figcaption>
+        </figure>
+      </section>
+
+      <section id="busqueda">
+        <h2>Búsqueda Dual de Componentes</h2>
+        <p>Una herramienta diseñada para acelerar la navegación tanto en el documento como en la red.</p>
+
+        <ol class="steps">
+          <li>Presiona <span class="kbd">Buscar Componente</span>.</li>
+          <li>Escribe la nomenclatura exacta impresa (ej. <code>NCP1271</code> o <code>U100</code>).</li>
+          <li>Selecciona <strong>Localizar en Esquema</strong> para enfocar la cámara, o <strong>Investigar</strong>
+            para abrir documentación técnica.</li>
+        </ol>
+
+        <figure>
+          <div class="img-container">
+            <!-- SUGERENCIA DE IMAGEN: Capturar el nuevo diálogo de búsqueda dual que no utiliza asistencia de IA -->
+            <img alt="Diálogo de búsqueda de componente con doble acción"
+              src="img/07_busqueda_componente_dialogo.png" />
+          </div>
+          <figcaption>Prompt de búsqueda inteligente integrado con el motor de render.</figcaption>
+        </figure>
+      </section>
+
+      <section id="datasheets">
+        <h2>Datasheets Integrados</h2>
+        <p>El flujo de investigación no interrumpe tu espacio de trabajo. Al seleccionar la opción de investigar,
+          ElectroNexo despliega un <code>CustomWebView</code> overlay.</p>
+
+        <ul>
+          <li>Navegación nativa con controles de historial (Atrás, Adelante, Recargar).</li>
+          <li>Renderizado in-app de PDFs técnicos sin depender de visores externos.</li>
+          <li>Búsqueda automática en repositorios como Onsemi o bases de datos de componentes SMD.</li>
+        </ul>
+
+        <figure>
+          <div class="img-container">
+            <img alt="Navegador de datasheet interno integrado al flujo"
+              src="img/08_investigar_datasheet_integrado.png" />
+          </div>
+          <figcaption>Visor de datasheet paralelo al lienzo del esquemático.</figcaption>
+        </figure>
+      </section>
+
+      <section id="memoria">
+        <h2>Gestión de Proyectos y Memoria</h2>
+        <p>El análisis topológico avanzado puede consumir tiempo. ElectroNexo resuelve esto mediante un sistema dual:
+        </p>
+
+        <ul>
+          <li><strong>Caché Temporal:</strong> Los análisis en curso se cachean en
+            <code>data/projects/temp_analysis/</code> para evitar recalcular la geometría si no hay cambios.
+          </li>
+          <li><strong>Guardar Proyecto:</strong> Almacena de forma persistente y segura el proyecto en
+            <code>Documentos/NEXO-Proyectos/</code>, incluyendo la matriz geométrica, las modificaciones del
+            bisturí y el hash del documento.
+          </li>
+          <li><strong>Cargar Seleccionado:</strong> Restaura sesiones enteras desde el caché local o proyectos guardados
+            en una fracción del
+            tiempo de análisis original.</li>
+        </ul>
+
+        <figure>
+          <div class="img-container">
+            <!-- SUGERENCIA DE IMAGEN: Capturar el gestor de proyectos guardados mostrando el directorio NEXO-Proyectos -->
+            <img alt="Panel de gestión de proyectos para carga y guardado" src="img/09_guardar_cargar_proyecto.png" />
+          </div>
+          <figcaption>Bandeja de proyectos persistidos. Previene re-procesamientos innecesarios.</figcaption>
+        </figure>
+      </section>
+
+    </main>
+  </div>
+</body>
+
+</html>
