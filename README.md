@@ -52,7 +52,7 @@ Técnica diseñada para garantizar la visibilidad de los puntos de anclaje en lo
 ## 📥 Descarga e Instalación (v2.1 Estable)
 
 > [!IMPORTANT] >
-> [**🚀 Descargar ElectroNexo_Instalador.exe**](https://github.com/Ccom5/Nexo-/releases/download/v2.0.0/ElectroNexo_Instalador.exe)  
+> [**🚀 Descargar ElectroNexo_Instalador.exe**](https://github.com/Ccom5/ElectroNexo/releases/download/untagged-aaf779de6af535de6ffc/ElectroNexo_Installer_v1.exe)  
 > _Versión Estable | 175 MB | Verificado vía SHA-256_
 
 ### ⚠️ Aviso sobre la Seguridad de Windows (SmartScreen)
